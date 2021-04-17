@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>VRitsy</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="script.js" defer></script>
+    <script src="interface.js" defer></script>
+    <script src="code.js" defer></script>
+  </head>
+
+  <body>
+    <div id="name">
+      <span><b>VRitsy</b></span><br>
+      a tiny VR game engine by Julia<br>
+      built on <a href="https://aframe.io" target="_blank">A-Frame</a>
+    </div>
+    <div id="codeDiv">
+      <textarea id="text-val"></textarea><br>
+      <button onclick="updateCode()">update code</button>
+    </div>
+    <br>
+    <button id="viewCodeButton" onclick="viewCode()">View your game code</button>
+    <button type="button" id="downloadButton">Download your game as an HTML file</button>
+    <br>
+
+    <div id="VRscene">
+      <a-scene id="aframeScene" embedded background="color: powderblue">
+        <a-entity id="boxContainer" position="-5 0 0" scale="1 1 1"></a-entity>
+        <a-plane scale="10 10" position="-.5 -.5 -5.5" rotation="-90 0 0" color="green"></a-plane>
+        <a-entity id="debugText" position="0 1 -4"></a-entity>
+
+        <a-entity id="rig" position="0 0 0" wasd-controls="acceleration:30" look-controls>
+          <a-camera id="camera" cursor="rayOrigin: mouse" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
+          <a-entity oculus-touch-controls="hand: left"></a-entity>
+          <a-entity laser-controls="hand:right" raycaster="objects:a-box; far:100;"></a-entity>
+        </a-entity>
+
+      </a-scene>
+    </div>
+
+    <div id="tools">
+      <div id="grid0button" class="gridButton selectedButton" layer="0">0</div>
+      <div id="grid1button" class="gridButton" layer="1">1</div>
+      <div id="grid2button" class="gridButton" layer="2">2</div>
+      <div id="grid3button" class="gridButton" layer="3">3</div>
+      <div id="grid4button" class="gridButton" layer="4">4</div>
+      <div id="grid5button" class="gridButton" layer="5">5</div>
+      <div id="grid6button" class="gridButton" layer="6">6</div>
+      <div id="grid7button" class="gridButton" layer="7">7</div>
+      <div id="grid8button" class="gridButton" layer="8">8</div>
+      <div id="grid9button" class="gridButton" layer="9">9</div>
+
+      <br><br>
+
+      <div id="gridContainer">
+        <div id="grid0" class="grid"></div>
+        <div id="grid1" class="grid"></div>
+        <div id="grid2" class="grid"></div>
+        <div id="grid3" class="grid"></div>
+        <div id="grid4" class="grid"></div>
+        <div id="grid5" class="grid"></div>
+        <div id="grid6" class="grid"></div>
+        <div id="grid7" class="grid"></div>
+        <div id="grid8" class="grid"></div>
+        <div id="grid9" class="grid"></div>
+      </div>
+
+      <div id="colorPicker"></div>
+
+    </div>
+
+  </body>
+</html>
