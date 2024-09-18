@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>VRitsy</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="addThings.js" defer></script>
+    <script src="interface.js" defer></script>
+    <script src="text.js" defer></script>
+  </head>
+
+  <body>
+    <div id="name">
+      <span><b>VRitsy</b></span><br>
+      a tiny VR game engine by Jukel<br>
+      built on <a href="https://aframe.io" target="_blank">A-Frame</a>
+    </div>
+
+    <div id="codeDiv">
+      <textarea id="text-val"></textarea><br>
+      <button id="updateCodeButton" onclick="updateCode()">update code</button>
+      <p id="codeButtonText" class="buttonText">Be careful changing things in here!</p>
+    </div>
+    <br>
+    <!--<button id="viewCodeButton" onclick="viewCode()">View your game code</button>-->
+
+    <button type="button" id="downloadButton">Download your game as an HTML file</button>
+    <br>
+
+    <div id="VRscene">
+      <a-scene id="aframeScene" embedded background="color: powderblue">
+        <a-plane scale="10 10" position="-.5 -.5 -5.5" rotation="-90 0 0" color="green"></a-plane>
+        <a-entity id="debugText" position="0 1 -4"></a-entity>
+        <a-entity id="container" position="-5 0 0"></a-entity>
+        <a-entity id="rig" position="0 0 0" wasd-controls="acceleration:30" look-controls>
+          <a-camera id="camera" cursor="rayOrigin: mouse" raycaster="objects:a-box, door, .startPos" wasd-controls-enabled="false" look-controls-enabled="false">
+            <a-sphere id="headBubble" bubble position="0 -0 0" material="color:white; transparent:true; opacity:0; side:double"
+                      animation="property:material.opacity; from:0; to:1; dir:alternate; loop:1; dur:2000; easing:easeInOutQuad; startEvents:fade"></a-sphere>
+          </a-camera>
+          <!--<a-entity oculus-touch-controls="hand: left"></a-entity>-->
+          <a-entity laser-controls="hand:right" raycaster="objects:a-box, door, .startPos; far:100;"></a-entity>
+        </a-entity>
+      </a-scene>
+    </div>
+
+    <div id="tools">
+      <div id="levelButtons">
+        <select id="levelPicker" onchange="setLevel()"></select>
+        <button onclick="makeLevel()" style="background-color:white">+</button>
+      </div>
+
+      <br><br>
+      <div id="layerButtons">
+        <div id="grid9button" class="gridButton" layer="9">9</div>
+        <div id="grid8button" class="gridButton" layer="8">8</div>
+        <div id="grid7button" class="gridButton" layer="7">7</div>
+        <div id="grid6button" class="gridButton" layer="6">6</div>
+        <div id="grid5button" class="gridButton" layer="5">5</div>
+        <div id="grid4button" class="gridButton" layer="4">4</div>
+        <div id="grid3button" class="gridButton" layer="3">3</div>
+        <div id="grid2button" class="gridButton" layer="2">2</div>
+        <div id="grid1button" class="gridButton" layer="1">1</div>
+        <div id="grid0button" class="gridButton selectedButton" layer="0">0</div>
+      </div>
+
+      <br><br>
+
+      <div id="gridBackground"></div>
+      <div id="levelContainer"></div>
+      <div id="colorPicker"></div>
+      <!--<div id="colorOptions">
+        <b><u>On click:</u><br>
+        <input type="radio" id="clickerRad" name="options" value="clicker" onchange="changeRadio(clicker)" checked>
+        <label for="clickerRad">Push</label><br>
+        <!--
+        &nbsp;&nbsp;&nbsp;<input type="checkbox" id="pushx" name="pushdir" value="x" checked>
+        <label for="pushx">X</label><br>
+        &nbsp;&nbsp;&nbsp;<input type="checkbox" id="pushy" name="pushdir" value="y" checked>
+        <label for="pushy">Y</label><br>
+        &nbsp;&nbsp;&nbsp;<input type="checkbox" id="pushz" name="pushdir" value="z" checked>
+        <label for="pushz">Z</label><br>
+        -->
+       <!-- <input type="radio" id="destroyRad" name="options" value="destroy" onchange="changeRadio(destroy)">
+        <label for="destroyRad">Destroy</label><br>
+        <input type="radio" id="noneRad" name="options" value="none" onchange="changeRadio(none)">
+        <label for="noneRad">None</label><br></b>
+      </div>-->
+
+      <div id="fancyPicker">
+        <img id="teleporterButton" class="fancyButton" onclick="setTeleport()" src="https://cdn.glitch.com/f5a44d39-2edb-408d-80a9-bc731e88ab49%2FteleporterButton.PNG?v=1619284493151">
+        <img id="startButton" class="fancyButton" onclick="setStart()" src="https://cdn.glitch.com/f5a44d39-2edb-408d-80a9-bc731e88ab49%2FstartButton.PNG?v=1619284485519">
+        <img id="doorButton" class="fancyButton" onclick="setDoor()" src="https://cdn.glitch.com/f5a44d39-2edb-408d-80a9-bc731e88ab49%2FdoorButton.PNG?v=1619284482440">
+        <p id="teleporterButtonText" class="buttonText">Teleporter</p>
+        <p id="startButtonText" class="buttonText">Player start position (only use one per level)</p>
+        <p id="doorButtonText" class="buttonText">Door to next room</p>
+      </div>
+
+    </div>
+
+  </body>
+</html>
